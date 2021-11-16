@@ -25,43 +25,74 @@ Let’s try running a simple MongoDB replica with 3 nodes. In order to do so, yo
 
 ```$ git clone https://github.com/khanhtmn/mongodb-tutorial.git```
 
-- Step 2: Run `docker-compose` in detached mode
+- Step 2: `cd` to the repository
+
+```$ cd mongodb-tutorial```
+
+- Step 3: Run `docker-compose` in detached mode
 
 ```$ docker-compose up -d```
 
-- Step 3: Copy the data to MongoDB memory
+- Step 4: Copy the data to MongoDB memory
 
-```$ docker cp zips.json mongodb:/zips.json```
+```$ docker cp zips.json mongodb-primary:/zips.json```
 
-- Step 4: Import data to MongoDB
-
-```$ mongoimport --db test --collection docs --authenticationDatabase admin --username root --password password123 --drop --batchSize 1 --file ./zips.json```
-
-- Step 5: Get into the bash of the primary node
+- Step 5: Get into the `bash` shell of the primary node
 
 ```$ docker exec -it mongodb-primary bash```
 
-- Step 6: Log in as `root` user
+- Step 6: Import data to MongoDB
+
+```$ mongoimport --db test --collection docs --authenticationDatabase admin --username root --password password123 --drop --batchSize 1 --file ./zips.json```
+
+- Step 7: Log in as `root` user. Now we are in the `mongo` shell
 
 ```$ mongo -u root -p password123 --authenticationDatabase admin```
 
-- Step 7: Do a sample query
+- Step 8: Check the status of the replica
+
+``` rs.status()```
+
+- Step 9: Check the members of the replica
+
+```rs.status.members()```
+
+- Step 10: Do a sample query
 
 ```$ db.docs.find( { city: "BOSTON" } )```
 
-- Step 8: Do another sample query
+- Step 11: Do another sample query
 
 ```$ db.docs.count( { city: "BOSTON" } )```
 
-- Step 9: Shut down the primary node
+- Step 12: Exit the `mongo` shell and `bash` shell
 
-```$ exit``
+```
+$ exit
+$ exit
+``` 
 
-Use the command above twice to exit the `mongo` shell and `bash` shell
+**Note**: Use the command above **twice** to exit both the `mongo` shell and `bash` shell
+
+- Step 13: Shut down the primary node
 
 ```$ docker stop mongodb-primary```
 
-- Step 10: Repeat from step 5 to step 8 above and see if the results match with the ones from step 7 and step 8.
+- Step 14: Get into the `bash` shell of the secondary node
+
+```$ docker exec -it mongodb-secondary bash```
+
+- Step 15: Repeat from `step 7` to `step 11` above and compare the results with the previous run
+
+- Step 16: Shut down the replica
+
+Again, exit the shell twice
+
+```
+$ exit
+$ exit
+$ docker-compose down
+```
 
 ### References:
 - [MongoDB(R) packaged by Bitnami](https://github.com/bitnami/bitnami-docker-mongodb)
