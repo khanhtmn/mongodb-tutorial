@@ -16,7 +16,6 @@ Let’s try running a simple MongoDB replica with 3 nodes. In order to do so, yo
 ### Disclaimer:
 
 - All of the following commands are compatible with `Linux/MacOS`. If you’re using `Windows`, please use Google to get their equivalence.
-- Because Elasticsearch is quite memory intensive, you should turn off any unnecessary tabs or applications on your computer before running Elasticsearch.
 - You may need to run the Docker commands with `sudo` if there’s any error about permission. If you don’t want to use `sudo` every time you run the Docker commands, considering following this advice: https://askubuntu.com/questions/477551/how-can-i-use-docker-without-sudo
 
 ### Step-by-step guide
@@ -43,7 +42,7 @@ Let’s try running a simple MongoDB replica with 3 nodes. In order to do so, yo
 
 - Step 6: Import data to MongoDB
 
-```$ mongoimport --db test --collection docs --authenticationDatabase admin --username root --password password123 --drop --batchSize 1 --file ./zips.json```
+```$ mongoimport --db test --collection docs --authenticationDatabase admin --username root --password password123 --drop --batchSize 10 --file ./zips.json```
 
 - Step 7: Log in as `root` user. Now we are in the `mongo` shell
 
