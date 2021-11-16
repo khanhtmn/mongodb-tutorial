@@ -54,7 +54,7 @@ Let’s try running a simple MongoDB replica with 3 nodes. In order to do so, yo
 
 - **Step 9**: Check the members of the replica
 
-```rs.status.members()```
+```rs.status.members```
 
 - **Step 10**: Do a sample query
 
