@@ -20,51 +20,51 @@ Let’s try running a simple MongoDB replica with 3 nodes. In order to do so, yo
 
 ### Step-by-step guide
 
-- Step 1: Clone this repository
+- **Step 1**: Clone this repository
 
 ```$ git clone https://github.com/khanhtmn/mongodb-tutorial.git```
 
-- Step 2: `cd` to the repository
+- **Step 2**: `cd` to the repository
 
 ```$ cd mongodb-tutorial```
 
-- Step 3: Run `docker-compose` in detached mode
+- **Step 3**: Run `docker-compose` in detached mode
 
 ```$ docker-compose up -d```
 
-- Step 4: Copy the data to MongoDB memory
+- **Step 4**: Copy the data to MongoDB memory
 
 ```$ docker cp zips.json mongodb-primary:/zips.json```
 
-- Step 5: Get into the `bash` shell of the primary node
+- **Step 5**: Get into the `bash` shell of the primary node
 
 ```$ docker exec -it mongodb-primary bash```
 
-- Step 6: Import data to MongoDB
+- **Step 6**: Import data to MongoDB
 
 ```$ mongoimport --db test --collection docs --authenticationDatabase admin --username root --password password123 --drop --batchSize 10 --file ./zips.json```
 
-- Step 7: Log in as `root` user. Now we are in the `mongo` shell
+- **Step 7**: Log in as `root` user. Now we are in the `mongo` shell
 
 ```$ mongo -u root -p password123 --authenticationDatabase admin```
 
-- Step 8: Check the status of the replica
+- **Step 8**: Check the status of the replica
 
 ``` rs.status()```
 
-- Step 9: Check the members of the replica
+- **Step 9**: Check the members of the replica
 
 ```rs.status.members()```
 
-- Step 10: Do a sample query
+- **Step 10**: Do a sample query
 
 ```$ db.docs.find( { city: "BOSTON" } )```
 
-- Step 11: Do another sample query
+- **Step 11**: Do another sample query
 
 ```$ db.docs.count( { city: "BOSTON" } )```
 
-- Step 12: Exit the `mongo` shell and `bash` shell
+- **Step 12**: Exit the `mongo` shell and `bash` shell
 
 ```
 $ exit
@@ -73,17 +73,17 @@ $ exit
 
 **Note**: Use the command above **twice** to exit both the `mongo` shell and `bash` shell
 
-- Step 13: Shut down the primary node
+- **Step 13**: Shut down the primary node
 
 ```$ docker stop mongodb-primary```
 
-- Step 14: Get into the `bash` shell of the secondary node
+- **Step 14**: Get into the `bash` shell of the secondary node
 
 ```$ docker exec -it mongodb-secondary bash```
 
-- Step 15: Repeat from `step 7` to `step 11` above and compare the results with the previous run
+- **Step 15**: Repeat from `step 7` to `step 11` above and compare the results with the previous run
 
-- Step 16: Shut down the replica
+- **Step 16**: Shut down the replica
 
 Again, exit the shell twice
 
